@@ -1,0 +1,177 @@
+/* Search List Page Styles */
+.search-list-page {
+  background-color: #aeb4b9;
+  min-height: 100vh;
+  font-family: 'Inter', Arial, sans-serif;
+}
+
+.app-container {
+  max-width: 420px;
+  margin: 0 auto;
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 70px;
+}
+
+/* Status Bar */
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+}
+
+.status-time {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.status-icons {
+  display: flex;
+  gap: 6px;
+}
+
+.status-signal,
+.status-wifi,
+.status-battery {
+  width: 18px;
+  height: 18px;
+  background-color: #222;
+  border-radius: 50%;
+}
+
+/* Search Header */
+.search-header {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  gap: 12px;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-input-container {
+  flex: 1;
+  background-color: #fff;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.search-icon {
+  margin-right: 8px;
+  color: #888;
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 1rem;
+  background: transparent;
+}
+
+/* Filter Options */
+.filter-options {
+  display: flex;
+  gap: 12px;
+  padding: 8px 16px;
+  margin-bottom: 8px;
+}
+
+.filter-btn {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* Location List */
+.location-list {
+  background-color: #fff;
+  border-radius: 16px 16px 0 0;
+  overflow: hidden;
+}
+
+.location-item {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.location-icon {
+  margin-right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.location-details {
+  flex: 1;
+}
+
+.location-name {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 4px;
+  color: #23272f;
+}
+
+.location-address {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-around;
+  padding: 12px 0;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav-btn.active {
+  color: #9CA4A9;
+}
+
+.nav-btn.active svg {
+  stroke: #9CA4A9;
+}
+
+@media (min-width: 601px) {
+  .app-container {
+    max-width: 480px;
+  }
+} 

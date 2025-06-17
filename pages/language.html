@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Choose Language -Tryvels</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="language-page">
+  <div class="app-container">
+    <!-- Status Bar -->
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+      <div class="status-icons">
+        <span class="status-signal"></span>
+        <span class="status-wifi"></span>
+        <span class="status-battery"></span>
+      </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="language-hero">
+      <div class="language-hero-content">
+        <img src="../assets/logo.svg" alt="Tryvel Logo" class="language-logo">
+        <h1>Tryvel</h1>
+      </div>
+    </div>
+
+    <!-- Language Content -->
+    <div class="language-content">
+      <!-- Search Bar -->
+      <div class="language-search-container">
+        <svg width="20" height="20" fill="none" stroke="#888" stroke-width="2" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="8"/>
+          <path d="M21 21l-4.35-4.35"/>
+        </svg>
+        <input type="text" class="language-search-input" placeholder="Search language">
+      </div>
+
+      <!-- Language Grid -->
+      <div class="language-grid">
+        <!-- Indonesian -->
+        <div class="language-card" onclick="selectLanguage('id')">
+          <div class="flag-container">
+            <div class="flag indonesia">
+              <div class="flag-top"></div>
+              <div class="flag-bottom"></div>
+            </div>
+          </div>
+          <span class="language-name">Indonesian</span>
+        </div>
+
+        <!-- Dutch -->
+        <div class="language-card" onclick="selectLanguage('nl')">
+          <div class="flag-container">
+            <div class="flag netherlands">
+              <div class="flag-top"></div>
+              <div class="flag-middle"></div>
+              <div class="flag-bottom"></div>
+            </div>
+          </div>
+          <span class="language-name">Dutch</span>
+        </div>
+
+        <!-- English UK -->
+        <div class="language-card" onclick="selectLanguage('en-GB')">
+          <div class="flag-container">
+            <div class="flag uk"></div>
+          </div>
+          <span class="language-name">English<br>United Kingdom</span>
+        </div>
+
+        <!-- English US -->
+        <div class="language-card" onclick="selectLanguage('en-US')">
+          <div class="flag-container">
+            <div class="flag usa"></div>
+          </div>
+          <span class="language-name">English<br>United States</span>
+        </div>
+
+        <!-- Portuguese -->
+        <div class="language-card" onclick="selectLanguage('pt')">
+          <div class="flag-container">
+            <div class="flag portugal"></div>
+          </div>
+          <span class="language-name">Portuguese</span>
+        </div>
+
+        <!-- Spanish -->
+        <div class="language-card" onclick="selectLanguage('es')">
+          <div class="flag-container">
+            <div class="flag spain"></div>
+          </div>
+          <span class="language-name">Spanish</span>
+        </div>
+
+        <!-- German -->
+        <div class="language-card" onclick="selectLanguage('de')">
+          <div class="flag-container">
+            <div class="flag germany"></div>
+          </div>
+          <span class="language-name">Deutschland</span>
+        </div>
+
+        <!-- Korean -->
+        <div class="language-card" onclick="selectLanguage('ko')">
+          <div class="flag-container">
+            <div class="flag korea"></div>
+          </div>
+          <span class="language-name">Korean</span>
+        </div>
+      </div>
+
+      <!-- Continue Button -->
+      <button class="language-continue-btn" disabled>Continue</button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const languageCards = document.querySelectorAll('.language-card');
+      const continueBtn = document.querySelector('.language-continue-btn');
+      let selectedLanguage = null;
+
+      // Function to handle language selection
+      window.selectLanguage = function(langCode) {
+        // Remove active class from all cards
+        languageCards.forEach(card => {
+          card.classList.remove('active');
+        });
+
+        // Add active class to selected card
+        const selectedCard = document.querySelector(`.language-card[onclick="selectLanguage('${langCode}')"]`);
+        if (selectedCard) {
+          selectedCard.classList.add('active');
+          selectedLanguage = langCode;
+          continueBtn.removeAttribute('disabled');
+        }
+      };
+
+      // Continue button click handler
+      continueBtn.addEventListener('click', function() {
+        if (selectedLanguage) {
+          // Store selected language in localStorage
+          localStorage.setItem('selectedLanguage', selectedLanguage);
+          // Redirect to home page
+          window.location.href = 'home.html';
+        }
+      });
+
+      // Search functionality
+      const searchInput = document.querySelector('.language-search-input');
+      searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        
+        languageCards.forEach(card => {
+          const languageName = card.querySelector('.language-name').textContent.toLowerCase();
+          if (languageName.includes(searchTerm)) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html> 

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loading -Tryvels</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* Additional inline styles for enhanced animations */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    
+    .loading-logo {
+      animation: pulse 2s infinite;
+    }
+    
+    .loading-dots span {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #9CA4A9;
+      margin: 0 3px;
+      opacity: 0;
+      animation: dot-fade 1.4s infinite;
+    }
+    
+    .loading-dots span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    
+    .loading-dots span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+    
+    @keyframes dot-fade {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 1; }
+    }
+    
+    .loading-message {
+      font-size: 0.9rem;
+      color: #777;
+      margin-top: 8px;
+      opacity: 0;
+      animation: message-fade 10s forwards;
+    }
+    
+    @keyframes message-fade {
+      0% { opacity: 0; }
+      10% { opacity: 0; }
+      20% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+    
+    .loading-messages {
+      height: 20px;
+      position: relative;
+      margin-top: 12px;
+    }
+  </style>
+</head>
+<body class="loading-page">
+  <div class="app-container">
+    <!-- Status Bar -->
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+      <div class="status-icons">
+        <span class="status-signal"></span>
+        <span class="status-wifi"></span>
+        <span class="status-battery"></span>
+      </div>
+    </div>
+
+    <!-- Loading Content -->
+    <div class="loading-content">
+      <div class="loading-logo-container">
+        <img src="../assets/logo.svg" alt="Tryvel Logo" class="loading-logo">
+      </div>
+      <h1>Tryvel</h1>
+      <p class="loading-tagline">Discover amazing places around you</p>
+      
+      <div class="loading-progress">
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+        <div class="loading-dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="loading-messages">
+          <p class="loading-text">Loading your experience<span id="loadingDots"></span></p>
+          <p class="loading-message" id="message1">Finding the best places for you...</p>
+          <p class="loading-message" id="message2">Preparing your personalized experience...</p>
+          <p class="loading-message" id="message3">Almost ready to explore...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const progressFill = document.querySelector('.progress-fill');
+      const loadingText = document.querySelector('.loading-text');
+      const message1 = document.getElementById('message1');
+      const message2 = document.getElementById('message2');
+      const message3 = document.getElementById('message3');
+      let width = 0;
+      
+      // Hide all messages initially
+      message1.style.display = 'none';
+      message2.style.display = 'none';
+      message3.style.display = 'none';
+      
+      // Simulate loading progress
+      const interval = setInterval(function() {
+        if (width >= 100) {
+          clearInterval(interval);
+          loadingText.textContent = 'Ready!';
+          
+          // Redirect to the language selection page after loading completes
+          setTimeout(function() {
+            window.location.href = 'login.html';
+          }, 500);
+        } else {
+          width += 1;
+          progressFill.style.width = width + '%';
+          
+          // Show different messages at different stages
+          if (width === 25) {
+            message1.style.display = 'block';
+            message2.style.display = 'none';
+            message3.style.display = 'none';
+          } else if (width === 50) {
+            message1.style.display = 'none';
+            message2.style.display = 'block';
+            message3.style.display = 'none';
+          } else if (width === 75) {
+            message1.style.display = 'none';
+            message2.style.display = 'none';
+            message3.style.display = 'block';
+          }
+        }
+      }, 30);
+      
+      // Animate loading dots
+      let dots = '';
+      setInterval(function() {
+        dots = dots.length >= 3 ? '' : dots + '.';
+        document.getElementById('loadingDots').textContent = dots;
+      }, 500);
+    });
+  </script>
+</body>
+</html> 

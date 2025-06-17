@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saved Places - Webbase</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/saved.css">
+  <style>
+    .bookmark-btn {
+      transition: all 0.3s ease;
+      cursor: pointer;
+      padding: 0;
+      display: flex;
+      color: #7d7d7d;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.9);
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 2;
+    }
+
+    .bookmark-btn svg {
+      width: 24px;
+      height: 24px;
+      transition: all 0.3s ease;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+    }
+
+    .bookmark-btn:hover {
+      transform: scale(1.1);
+      background: rgba(255, 255, 255, 1);
+    }
+
+    .bookmark-btn.active svg {
+      fill: #FFD600;
+      stroke: #FFD600;
+    }
+
+    .bookmark-btn.animating {
+      transform: scale(1.2);
+    }
+
+    .bookmark-btn:active {
+      transform: scale(0.95);
+    }
+  </style>
+</head>
+<body class="saved-page">
+  <div class="app-container">
+    <!-- Status Bar -->
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+      <div class="status-icons">
+        <span class="status-signal"></span>
+        <span class="status-wifi"></span>
+        <span class="status-battery"></span>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header class="saved-header">
+      <h1>Saved</h1>
+      <div class="view-toggle">
+        <button class="toggle-btn active" data-view="grid">
+          <svg class="icon-medium" viewBox="0 0 24 24">
+            <rect x="3" y="3" width="7" height="7" />
+            <rect x="14" y="3" width="7" height="7" />
+            <rect x="3" y="14" width="7" height="7" />
+            <rect x="14" y="14" width="7" height="7" />
+          </svg>
+        </button>
+        <button class="toggle-btn" data-view="list">
+          <svg width="20" height="20" fill="none" stroke="var(--color-base)" stroke-width="2" viewBox="0 0 24 24">
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Saved Places Grid -->
+    <div class="saved-grid">
+      <!-- Saved Item 1 -->
+      <div class="saved-card" data-href="detail.html">
+        <div class="saved-image">
+          <img src="https://images.unsplash.com/photo-1545579133-99bb5ab189bd" alt="Kuta Beach">
+          <button class="bookmark-btn" data-id="kuta-beach" type="button">
+            <svg viewBox="0 0 24 24">
+              <path d="M6 4a2 2 0 0 0-2 2v14l8-5.333L20 20V6a2 2 0 0 0-2-2H6z"/>
+            </svg>
+          </button>
+        </div>
+        <div class="saved-info">
+          <h3>Kuta Beach</h3>
+          <p>Bali, Indonesia</p>
+          <div class="saved-rating">
+            <span class="stars">
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24" style="margin-right:2px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24" style="margin-right:2px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24" style="margin-right:2px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24" style="margin-right:2px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            </span>
+            <span class="rating-value">4.8</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Saved Item 2 -->
+      <div class="saved-card" data-href="detail.html">
+        <div class="saved-image">
+          <img src="https://images.unsplash.com/photo-1555400038-63f5ba517a47" alt="Borobudur Temple">
+          <button class="bookmark-btn" data-id="borobudur" type="button">
+            <svg viewBox="0 0 24 24">
+              <path d="M6 4a2 2 0 0 0-2 2v14l8-5.333L20 20V6a2 2 0 0 0-2-2H6z"/>
+            </svg>
+          </button>
+        </div>
+        <div class="saved-info">
+          <h3>Borobudur Temple</h3>
+          <p>Magelang, Central Java</p>
+          <div class="saved-rating">
+            <span class="stars">
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24" style="margin-right:2px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24" style="margin-right:2px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24" style="margin-right:2px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24" style="margin-right:2px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            </span>
+            <span class="rating-value">4.9</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Saved Item 3 -->
+      <div class="saved-card" data-href="detail.html">
+        <div class="saved-image">
+          <img src="https://images.unsplash.com/photo-1573790387438-4da905039392" alt="Mount Bromo">
+          <button class="bookmark-btn" data-id="mount-bromo" type="button">
+            <svg viewBox="0 0 24 24">
+              <path d="M6 4a2 2 0 0 0-2 2v14l8-5.333L20 20V6a2 2 0 0 0-2-2H6z"/>
+            </svg>
+          </button>
+        </div>
+        <div class="saved-info">
+          <h3>Mount Bromo</h3>
+          <p>East Java, Indonesia</p>
+          <div class="saved-rating">
+            <span class="stars">
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24" style="margin-right:2px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24" style="margin-right:2px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24" style="margin-right:2px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24" style="margin-right:2px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            </span>
+            <span class="rating-value">4.7</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Saved Item 4 -->
+      <div class="saved-card" data-href="detail.html">
+        <div class="saved-image">
+          <img src="https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f" alt="Tanjung Puting">
+          <button class="bookmark-btn" data-id="tanjung-puting" type="button">
+            <svg viewBox="0 0 24 24">
+              <path d="M6 4a2 2 0 0 0-2 2v14l8-5.333L20 20V6a2 2 0 0 0-2-2H6z"/>
+            </svg>
+          </button>
+        </div>
+        <div class="saved-info">
+          <h3>Tanjung Puting</h3>
+          <p>Kalimantan, Indonesia</p>
+          <div class="saved-rating">
+            <span class="stars">
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24" style="margin-right:2px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24" style="margin-right:2px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24" style="margin-right:2px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24" style="margin-right:2px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            </span>
+            <span class="rating-value">4.6</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Saved Item 5 -->
+      <div class="saved-card" data-href="detail.html">
+        <div class="saved-image">
+          <img src="https://images.unsplash.com/photo-1516690561799-46d8f74f9abf" alt="Komodo Island">
+          <button class="bookmark-btn" data-id="komodo" type="button">
+            <svg viewBox="0 0 24 24">
+              <path d="M6 4a2 2 0 0 0-2 2v14l8-5.333L20 20V6a2 2 0 0 0-2-2H6z"/>
+            </svg>
+          </button>
+        </div>
+        <div class="saved-info">
+          <h3>Komodo Island</h3>
+          <p>East Nusa Tenggara</p>
+          <div class="saved-rating">
+            <span class="stars">
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24" style="margin-right:2px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24" style="margin-right:2px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24" style="margin-right:2px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24" style="margin-right:2px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            </span>
+            <span class="rating-value">4.8</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Saved Item 6 -->
+      <div class="saved-card" data-href="detail.html">
+        <div class="saved-image">
+          <img src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2" alt="Sayap Suci">
+          <button class="bookmark-btn" data-id="sayap-suci" type="button">
+            <svg viewBox="0 0 24 24">
+              <path d="M6 4a2 2 0 0 0-2 2v14l8-5.333L20 20V6a2 2 0 0 0-2-2H6z"/>
+            </svg>
+          </button>
+        </div>
+        <div class="saved-info">
+          <h3>Sayap Suci Kelapa Gading</h3>
+          <p>Jakarta Utara</p>
+          <div class="saved-rating">
+            <span class="stars">
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24" style="margin-right:2px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24" style="margin-right:2px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24" style="margin-right:2px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24" style="margin-right:2px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            </span>
+            <span class="rating-value">4.5</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Saved Item 7 -->
+      <div class="saved-card" data-href="detail-museum.html">
+        <div class="saved-image">
+          <img src="https://images.unsplash.com/photo-1555400038-63f5ba517a47" alt="Borobudur Temple">
+          <button class="bookmark-btn" data-id="borobudur-museum" type="button">
+            <svg viewBox="0 0 24 24">
+              <path d="M6 4a2 2 0 0 0-2 2v14l8-5.333L20 20V6a2 2 0 0 0-2-2H6z"/>
+            </svg>
+          </button>
+        </div>
+        <div class="saved-info">
+          <h3>Borobudur Temple</h3>
+          <p>Magelang, Central Java</p>
+          <div class="saved-rating">
+            <span class="stars">
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24" style="margin-right:2px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24" style="margin-right:2px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24" style="margin-right:2px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24" style="margin-right:2px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            </span>
+            <span class="rating-value">4.9</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Saved Item 8 -->
+      <div class="saved-card" data-href="detail-mandalika.html">
+        <div class="saved-image">
+          <img src="https://images.unsplash.com/photo-1573790387438-4da905039392" alt="Mount Bromo">
+          <button class="bookmark-btn" data-id="mount-bromo" type="button">
+            <svg viewBox="0 0 24 24">
+              <path d="M6 4a2 2 0 0 0-2 2v14l8-5.333L20 20V6a2 2 0 0 0-2-2H6z"/>
+            </svg>
+          </button>
+        </div>
+        <div class="saved-info">
+          <h3>Mount Bromo</h3>
+          <p>East Java, Indonesia</p>
+          <div class="saved-rating">
+            <span class="stars">
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24" style="margin-right:2px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24" style="margin-right:2px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24" style="margin-right:2px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24" style="margin-right:2px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="16" height="16" fill="var(--color-gold)" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            </span>
+            <span class="rating-value">4.7</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <button class="nav-btn" data-href="home.html" aria-label="Home">
+        <svg class="icon-xlarge" viewBox="0 0 24 24">
+          <path d="M3 12L12 3l9 9"/>
+          <path d="M9 21V9h6v12"/>
+        </svg>
+        <span class="nav-label">Home</span>
+      </button>
+      <button class="nav-btn" data-href="search.html" aria-label="Search">
+        <svg class="icon-xlarge" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="8"/>
+          <path d="M21 21l-4.35-4.35"/>
+        </svg>
+        <span class="nav-label">Search</span>
+      </button>
+      <button class="nav-btn active" data-href="saved.html" aria-label="Bookmark">
+        <svg class="icon-xlarge" viewBox="0 0 24 24">
+          <path d="M6 4a2 2 0 0 0-2 2v14l8-5.333L20 20V6a2 2 0 0 0-2-2H6z"/>
+        </svg>
+        <span class="nav-label">Saved</span>
+      </button>
+      <button class="nav-btn" data-href="chat.html" aria-label="Chat">
+        <svg class="icon-xlarge" viewBox="0 0 24 24">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        </svg>
+        <span class="nav-label">Tryvel Support</span>
+      </button>
+      <button class="nav-btn" data-href="profile.html" aria-label="Profile">
+        <svg class="icon-xlarge" viewBox="0 0 24 24">
+          <circle cx="12" cy="7" r="4"/>
+          <path d="M5.5 21a8.38 8.38 0 0 1 13 0"/>
+        </svg>
+        <span class="nav-label">Profile</span>
+      </button>
+    </nav>
+  </div>
+
+  <script src="../js/navigation.js"></script>
+  <script src="../js/bookmark-handler.js"></script>
+  <script>
+    // Card click handlers
+    document.querySelectorAll('.saved-card').forEach(card => {
+      card.addEventListener('click', function(e) {
+        if (e.target.closest('.bookmark-btn')) {
+          return;
+        }
+        const href = this.dataset.href;
+        if (href) {
+          window.location.href = href;
+        }
+      });
+    });
+
+    // Navigation click handlers
+    document.querySelectorAll('.nav-btn[data-href]').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const href = this.dataset.href;
+        if (href) {
+          window.location.href = href;
+        }
+      });
+    });
+
+    // View toggle functionality
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const view = this.dataset.view;
+        document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        
+        if (view === 'grid') {
+          document.querySelector('.saved-grid').style.display = 'grid';
+          document.querySelector('.saved-list').style.display = 'none';
+        } else {
+          document.querySelector('.saved-grid').style.display = 'none';
+          document.querySelector('.saved-list').style.display = 'flex';
+        }
+      });
+    });
+  </script>
+</body>
+</html> 

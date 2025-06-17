@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login -Tryvels</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* Additional inline styles for enhanced design */
+    .login-hero {
+      height: 220px;
+      background: linear-gradient(135deg, #9CA4A9, #9CA4A9);
+      border-radius: 0 0 30px 30px;
+      padding: 20px;
+    }
+    
+    .login-hero-content {
+      margin-top: 20px;
+    }
+    
+    .login-logo {
+      width: 80px;
+      height: 80px;
+      background-color: white;
+      border-radius: 20px;
+      padding: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    
+    .login-content {
+      margin-top: -30px;
+      border-radius: 30px 30px 0 0;
+      padding: 30px 24px;
+    }
+    
+    .auth-tabs {
+      display: flex;
+      margin-bottom: 24px;
+      border-bottom: 2px solid #f0f2f5;
+    }
+    
+    .auth-tab {
+      flex: 1;
+      text-align: center;
+      padding: 12px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #777;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    .auth-tab.active {
+      color: #9CA4A9;
+    }
+    
+    .auth-tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: #9CA4A9;
+      border-radius: 3px 3px 0 0;
+    }
+    
+    .login-subtitle {
+      margin-bottom: 30px;
+    }
+    
+    .input-container {
+      border-radius: 16px;
+      padding: 0 20px;
+      margin-bottom: 20px;
+      height: 56px;
+      position: relative;
+    }
+    
+    .input-container svg {
+      color: #888;
+    }
+    
+    .input-container input {
+      font-size: 1.05rem;
+    }
+    
+    .login-btn {
+      border-radius: 16px;
+      padding: 18px;
+      font-size: 1.1rem;
+      margin-top: 10px;
+      background: linear-gradient(135deg, #9CA4A9, #9CA4A9);
+    }
+    
+    .social-login {
+      text-align: center;
+      margin: 24px 0;
+    }
+    
+    .social-login p {
+      color: #777;
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .social-login p::before, 
+    .social-login p::after {
+      content: '';
+      height: 1px;
+      background-color: #e0e0e0;
+      flex: 1;
+    }
+    
+    .social-login p::before {
+      margin-right: 16px;
+    }
+    
+    .social-login p::after {
+      margin-left: 16px;
+    }
+    
+    .social-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      width: 100%;
+    }
+    
+    .social-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background-color: #fff;
+      border-radius: 50px;
+      padding: 12px 24px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      flex: 1;
+      max-width: 180px;
+      height: 56px;
+    }
+    
+    .social-btn.google {
+      color: #333;
+    }
+    
+    .social-btn.facebook {
+      color: #333;
+      border: 1px solid #e0e0e0;
+    }
+    
+    
+    .social-btn svg {
+      width: 24px;
+      height: 24px;
+    }
+    
+    .social-btn.google svg {
+      margin-right: 8px;
+    }
+    
+    .social-btn.facebook svg {
+      margin-right: 8px;
+    }
+    
+    .social-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    
+    .form-content {
+      display: block;
+    }
+    
+    .signup-content {
+      display: none;
+    }
+
+    /* Validation Styles */
+    .validation-icon {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      display: none;
+    }
+
+    .validation-icon.valid {
+      color: #4CAF50;
+    }
+
+    .validation-icon.invalid {
+      color: #ff4444;
+    }
+
+    .input-container {
+      margin-bottom: 24px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .error-message {
+      color: #ff4444;
+      font-size: 0.85rem;
+      margin-top: 6px;
+      margin-left: 0;
+      display: none;
+      padding: 6px 12px;
+      background-color: rgba(255, 68, 68, 0.08);
+      border-radius: 6px;
+      border-left: 3px solid #ff4444;
+      width: 100%;
+      box-sizing: border-box;
+      position: static;
+      animation: slideIn 0.3s ease-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .input-container input:focus {
+      outline: none;
+      border-color: #9CA4A9;
+    }
+
+    .input-container input.valid {
+      border-color: #4CAF50;
+      background-color: rgba(76, 175, 80, 0.05);
+    }
+
+    .input-container input.invalid {
+      border-color: #ff4444;
+      background-color: rgba(255, 68, 68, 0.05);
+    }
+
+    .input-container input.valid:focus {
+      border-color: #4CAF50;
+      box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+    }
+
+    .input-container input.invalid:focus {
+      border-color: #ff4444;
+      box-shadow: 0 0 0 2px rgba(255, 68, 68, 0.2);
+    }
+  </style>
+</head>
+<body class="login-page">
+  <div class="app-container">
+    <!-- Status Bar -->
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+      <div class="status-icons">
+        <span class="status-signal"></span>
+        <span class="status-wifi"></span>
+        <span class="status-battery"></span>
+      </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="login-hero">
+      <div class="login-hero-content">
+        <img src="../assets/logo.svg" alt="Tryvel Logo" class="login-logo">
+        <h1>Tryvel</h1>
+        <p>Discover amazing places around you</p>
+      </div>
+    </div>
+
+    <!-- Login Content -->
+    <div class="login-content">
+      <!-- Auth Tabs -->
+      <div class="auth-tabs">
+        <div class="auth-tab active" id="login-tab">Sign In</div>
+        <div class="auth-tab" id="signup-tab">Sign Up</div>
+      </div>
+      
+      <!-- Login Form -->
+      <div class="form-content" id="login-form">
+        <p class="login-subtitle">Sign in to continue your journey</p>
+        
+        <form class="login-form">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <div class="input-container">
+              <svg width="20" height="20" fill="none" stroke="var(--color-base)" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <path d="M22 6l-10 7L2 6"/>
+              </svg>
+              <input type="email" id="email" placeholder="Your email" required>
+              <svg class="validation-icon valid" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+              </svg>
+              <svg class="validation-icon invalid" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/>
+              </svg>
+              <div class="error-message"></div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="input-container">
+              <svg width="20" height="20" fill="none" stroke="var(--color-base)" stroke-width="2" viewBox="0 0 24 24">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+              <input type="password" id="password" placeholder="Your password" required>
+              <svg class="validation-icon valid" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+              </svg>
+              <svg class="validation-icon invalid" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/>
+              </svg>
+              <div class="error-message"></div>
+              
+            </div>
+          </div>
+          
+          <div class="form-options">
+            <label class="remember-me">
+              <input type="checkbox">
+              <span>Remember me</span>
+            </label>
+            <a href="#" class="forgot-password">Forgot Password?</a>
+          </div>
+          
+          <button type="submit" class="login-btn" onclick="window.location.href='language.html'; return false;">Sign In</button>
+        </form>
+        
+        <div class="social-login">
+          <p>Or sign in with</p>
+          <div class="social-buttons">
+            <button class="social-btn google">
+              <svg width="24" height="24" viewBox="0 0 24 24">
+                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+              </svg>
+              Google
+            </button>
+            <button class="social-btn facebook">
+              <svg width="24" height="24" viewBox="0 0 24 24">
+                <path d="M12 2C6.477 2 2 6.477 2 12C2 16.991 5.657 21.128 10.438 21.879V14.89H7.898V12H10.438V9.797C10.438 7.291 11.93 5.907 14.215 5.907C15.309 5.907 16.453 6.102 16.453 6.102V8.562H15.193C13.95 8.562 13.563 9.333 13.563 10.124V12H16.336L15.893 14.89H13.563V21.879C18.343 21.129 22 16.99 22 12C22 6.477 17.523 2 12 2Z" fill="#1877F2"/>
+              </svg>
+              Facebook
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Signup Form -->
+      <div class="form-content signup-content" id="signup-form">
+        <p class="login-subtitle">Create an account to start exploring</p>
+        
+        <form class="login-form">
+          <div class="form-group">
+            <label for="signup-name">Full Name</label>
+            <div class="input-container">
+              <svg width="20" height="20" fill="none" stroke="var(--color-base)" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              <input type="text" id="signup-name" placeholder="Your full name" required>
+              <svg class="validation-icon valid" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+              </svg>
+              <svg class="validation-icon invalid" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/>
+              </svg>
+              <div class="error-message"></div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="signup-email">Email</label>
+            <div class="input-container">
+              <svg width="20" height="20" fill="none" stroke="var(--color-base)" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <path d="M22 6l-10 7L2 6"/>
+              </svg>
+              <input type="email" id="signup-email" placeholder="Your email" required>
+              <svg class="validation-icon valid" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+              </svg>
+              <svg class="validation-icon invalid" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/>
+              </svg>
+              <div class="error-message"></div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="signup-password">Password</label>
+            <div class="input-container">
+              <svg width="20" height="20" fill="none" stroke="var(--color-base)" stroke-width="2" viewBox="0 0 24 24">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+              <input type="password" id="signup-password" placeholder="Create password" required>
+              <svg class="validation-icon valid" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+              </svg>
+              <svg class="validation-icon invalid" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/>
+              </svg>
+              <div class="error-message"></div>
+              
+            </div>
+          </div>
+          
+          <div class="form-options">
+            <label class="remember-me">
+              <input type="checkbox" required>
+              <span>I agree to the <a href="#" style="color: #9CA4A9;">Terms & Conditions</a></span>
+            </label>
+          </div>
+          
+          <button type="submit" class="login-btn" onclick="window.location.href='language.html'; return false;">Create Account</button>
+        </form>
+        
+        <div class="social-login">
+          <p>Or sign up with</p>
+          <div class="social-buttons">
+            <button class="social-btn google">
+              <svg width="24" height="24" viewBox="0 0 24 24">
+                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+              </svg>
+              Google
+            </button>
+            <button class="social-btn facebook">
+              <svg width="24" height="24" viewBox="0 0 24 24">
+                <path d="M12 2C6.477 2 2 6.477 2 12C2 16.991 5.657 21.128 10.438 21.879V14.89H7.898V12H10.438V9.797C10.438 7.291 11.93 5.907 14.215 5.907C15.309 5.907 16.453 6.102 16.453 6.102V8.562H15.193C13.95 8.562 13.563 9.333 13.563 10.124V12H16.336L15.893 14.89H13.563V21.879C18.343 21.129 22 16.99 22 12C22 6.477 17.523 2 12 2Z" fill="#1877F2"/>
+              </svg>
+              Facebook
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Form elements
+      const loginForm = document.querySelector('.login-form');
+      const signupForm = document.querySelector('.signup-form');
+      const loginTab = document.getElementById('login-tab');
+      const signupTab = document.getElementById('signup-tab');
+      const loginContent = document.getElementById('login-form');
+      const signupContent = document.getElementById('signup-form');
+
+      // Validation rules
+      const validationRules = {
+        email: {
+          pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+          message: 'Please enter a valid email address'
+        },
+        password: {
+          minLength: 8,
+          pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,}$/,
+          message: 'Password must be at least 8 characters and include letters and numbers'
+        },
+        name: {
+          minLength: 2,
+          pattern: /^[A-Za-z\s]{2,}$/,
+          message: 'Name must be at least 2 characters and contain only letters'
+        }
+      };
+
+      // Function to validate input
+      function validateInput(input, rules) {
+        const value = input.value.trim();
+        const errorMessage = input.parentElement.querySelector('.error-message');
+        const validIcon = input.parentElement.querySelector('.validation-icon.valid');
+        const invalidIcon = input.parentElement.querySelector('.validation-icon.invalid');
+
+        if (!value) {
+          showError(input, errorMessage, validIcon, invalidIcon, 'This field is required');
+          return false;
+        }
+
+        if (rules.minLength && value.length < rules.minLength) {
+          showError(input, errorMessage, validIcon, invalidIcon, `Must be at least ${rules.minLength} characters`);
+          return false;
+        }
+
+        if (rules.pattern && !rules.pattern.test(value)) {
+          showError(input, errorMessage, validIcon, invalidIcon, rules.message);
+          return false;
+        }
+
+        showValid(input, errorMessage, validIcon, invalidIcon);
+        return true;
+      }
+
+      // Function to show error state
+      function showError(input, errorMessage, validIcon, invalidIcon, message) {
+        input.classList.remove('valid');
+        input.classList.add('invalid');
+        errorMessage.textContent = message;
+        errorMessage.style.display = 'block';
+        validIcon.style.display = 'none';
+        invalidIcon.style.display = 'block';
+      }
+
+      // Function to show valid state
+      function showValid(input, errorMessage, validIcon, invalidIcon) {
+        input.classList.remove('invalid');
+        input.classList.add('valid');
+        errorMessage.style.display = 'none';
+        validIcon.style.display = 'block';
+        invalidIcon.style.display = 'none';
+      }
+
+      // Add real-time validation to all inputs
+      document.querySelectorAll('input[type="text"], input[type="email"], input[type="password"]').forEach(input => {
+        input.addEventListener('input', function() {
+          const rules = validationRules[this.id.replace('signup-', '').replace('email', 'email').replace('password', 'password').replace('name', 'name')];
+          if (rules) {
+            validateInput(this, rules);
+          }
+        });
+        input.addEventListener('blur', function() {
+          const rules = validationRules[this.id.replace('signup-', '').replace('email', 'email').replace('password', 'password').replace('name', 'name')];
+          if (rules) {
+            validateInput(this, rules);
+          }
+        });
+      });
+
+      // Toggle password visibility
+      document.querySelectorAll('.toggle-password').forEach(button => {
+        button.addEventListener('click', function() {
+          const input = this.parentElement.querySelector('input');
+          const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+          input.setAttribute('type', type);
+          
+          // Update icon
+          const icon = this.querySelector('svg');
+          if (type === 'text') {
+            icon.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>';
+          } else {
+            icon.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
+          }
+        });
+      });
+
+      // Tab switching
+      loginTab.addEventListener('click', function() {
+        loginTab.classList.add('active');
+        signupTab.classList.remove('active');
+        loginContent.style.display = 'block';
+        signupContent.style.display = 'none';
+      });
+
+      signupTab.addEventListener('click', function() {
+        signupTab.classList.add('active');
+        loginTab.classList.remove('active');
+        signupContent.style.display = 'block';
+        loginContent.style.display = 'none';
+      });
+
+      // Form submission
+      loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = document.getElementById('email');
+        const password = document.getElementById('password');
+        
+        const isEmailValid = validateInput(email, validationRules.email);
+        const isPasswordValid = validateInput(password, validationRules.password);
+
+        if (isEmailValid && isPasswordValid) {
+          // Proceed with login
+          console.log('Login form is valid');
+        }
+      });
+
+      signupForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = document.getElementById('signup-name');
+        const email = document.getElementById('signup-email');
+        const password = document.getElementById('signup-password');
+        
+        const isNameValid = validateInput(name, validationRules.name);
+        const isEmailValid = validateInput(email, validationRules.email);
+        const isPasswordValid = validateInput(password, validationRules.password);
+
+        if (isNameValid && isEmailValid && isPasswordValid) {
+          // Proceed with signup
+          console.log('Signup form is valid');
+        }
+      });
+    });
+  </script>
+</body>
+</html> 

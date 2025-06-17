@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search -Tryvels</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/saved.css">
+  <style>
+    .bookmark-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 36px;
+      height: 36px;
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      color: #7d7d7d;
+      justify-content: center;
+      padding: 0;
+      z-index: 2;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .bookmark-btn svg {
+      width: 24px;
+      height: 24px;
+      transition: all 0.3s ease;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+    }
+
+    .bookmark-btn:hover {
+      transform: scale(1.1);
+      background: rgba(255, 255, 255, 1);
+    }
+
+    .bookmark-btn.active svg {
+      fill: #FFD600;
+      stroke: #FFD600;
+    }
+
+    .bookmark-btn.animating {
+      transform: scale(1.2);
+    }
+
+    .bookmark-btn:active {
+      transform: scale(0.95);
+    }
+  </style>
+</head>
+<body class="search-page">
+  <div class="app-container">
+    <!-- Status Bar -->
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+      <div class="status-icons">
+        <span class="status-signal"></span>
+        <span class="status-wifi"></span>
+        <span class="status-battery"></span>
+      </div>
+    </div>
+
+    
+    <!-- Search Header -->
+    <div class="search-hero">
+      <div class="search-header">
+        <button class="back-btn" data-href="home.html" aria-label="Back">
+          <svg class="icon-large" viewBox="0 0 24 24">
+            <path d="M15 18l-6-6 6-6"/>
+          </svg>
+        </button>
+        <div class="search-input-container">
+          <svg class="search-icon icon-medium" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="M21 21l-4.35-4.35"/>
+          </svg>
+          <input type="text" class="search-input" id="searchInput" placeholder="What would you like to go?">
+        </div>
+      </div>
+
+      <!-- Filter Options -->
+      <div class="filter-options">
+       
+    </div>
+
+    <!-- Search Content -->
+    <div class="search-content">
+      <!-- Categories Section -->
+      <div class="detail-section">
+        <div class="section-header">
+          <h2>Categories</h2>
+        </div>
+        <div class="categories-grid">
+          <div class="category-item" onclick="filterByCategory('Beach')" style="cursor: pointer; transition: transform 0.2s;">
+            <div class="category-icon beach" style="background: #2a2a2a; padding: 16px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+              <svg class="icon-large" viewBox="0 0 24 24" style="color: #fff;">
+                <path d="M18 17a7 7 0 0 0-14 0"/>
+                <path d="M18 17H4M22 17h-4M12 9v4M8 13v-2M16 13v-2M12 3v2"/>
+              </svg>
+            </div>
+            <span style="margin-top: 8px; font-weight: 500;">Beach</span>
+          </div>
+          <div class="category-item" onclick="filterByCategory('Mountain')" style="cursor: pointer; transition: transform 0.2s;">
+            <div class="category-icon mountain" style="background: #2a2a2a; padding: 16px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+              <svg class="icon-large" viewBox="0 0 24 24" style="color: #fff;">
+                <path d="M8 3l4 8 5-5 5 15H2L8 3z"/>
+              </svg>
+            </div>
+            <span style="margin-top: 8px; font-weight: 500;">Mountain</span>
+          </div>
+          <div class="category-item" onclick="filterByCategory('Food')" style="cursor: pointer; transition: transform 0.2s;">
+            <div class="category-icon restaurant" style="background: #2a2a2a; padding: 16px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+              <svg class="icon-large" viewBox="0 0 24 24" style="color: #fff;">
+                <path d="M7 10h10M9 14h6M9 18h6M6.5 6C5.672 6 5 6.672 5 7.5S5.672 9 6.5 9 8 8.328 8 7.5 7.328 6 6.5 6zM17.5 6c-.828 0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5S19 8.328 19 7.5 18.328 6 17.5 6z"/>
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+              </svg>
+            </div>
+            <span style="margin-top: 8px; font-weight: 500;">Food</span>
+          </div>
+          <div class="category-item" onclick="filterByCategory('Park')" style="cursor: pointer; transition: transform 0.2s;">
+            <div class="category-icon park" style="background: #2a2a2a; padding: 16px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+              <svg class="icon-large" viewBox="0 0 24 24" style="color: #fff;">
+                <path d="M12 22v-8m0 0V7m0 7H7m5 0h5"/>
+                <path d="M16 5l-4-2-4 2M16 5v3c0 1.1.9 2 2 2h0M16 5l-4 2-4-2M4 11h0c1.1 0 2-1 2-2V6"/>
+                <path d="M20 22v-4a2 2 0 1 0-4 0v4M4 22v-4a2 2 0 1 1 4 0v4"/>
+              </svg>
+            </div>
+            <span style="margin-top: 8px; font-weight: 500;">Park</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search Results Section -->
+      <div class="detail-section">
+        <div class="section-header">
+          <h2>For you</h2>
+        </div>
+        <div class="search-results">
+          <!-- Results will be populated dynamically -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <button class="nav-btn" data-href="home.html" aria-label="Home">
+        <svg class="icon-xlarge" viewBox="0 0 24 24">
+          <path d="M3 12L12 3l9 9"/>
+          <path d="M9 21V9h6v12"/>
+        </svg>
+        <span class="nav-label">Home</span>
+      </button>
+      <button class="nav-btn active" data-href="search.html" aria-label="Search">
+        <svg class="icon-xlarge" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="8"/>
+          <path d="M21 21l-4.35-4.35"/>
+        </svg>
+        <span class="nav-label">Search</span>
+      </button>
+      <button class="nav-btn" data-href="saved.html" aria-label="Bookmark">
+        <svg class="icon-xlarge" viewBox="0 0 24 24">
+          <path d="M6 4a2 2 0 0 0-2 2v14l8-5.333L20 20V6a2 2 0 0 0-2-2H6z"/>
+        </svg>
+        <span class="nav-label">Saved</span>
+      </button>
+      <button class="nav-btn" data-href="chat.html" aria-label="Chat">
+        <svg class="icon-xlarge" viewBox="0 0 24 24">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        </svg>
+        <span class="nav-label">Tryvel Support</span>
+      </button>
+      <button class="nav-btn" data-href="profile.html" aria-label="Profile">
+        <svg class="icon-xlarge" viewBox="0 0 24 24">
+          <circle cx="12" cy="7" r="4"/>
+          <path d="M5.5 21a8.38 8.38 0 0 1 13 0"/>
+        </svg>
+        <span class="nav-label">Profile</span>
+      </button>
+    </nav>
+    <!-- END Bottom Navigation -->
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const searchInput = document.getElementById('searchInput');
+      const searchResults = document.querySelector('.search-results');
+      
+      // Sample data for demonstration
+      const places = [
+        {
+          id: 'arborea-cafe',
+          name: 'Arborea Cafe',
+          category: 'Food',
+          rating: 4.5,
+          image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80'
+        },
+        {
+          id: 'seafood-paradise',
+          name: 'Seafood Paradise',
+          category: 'Food',
+          rating: 4.7,
+          image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80'
+        },
+        {
+          id: 'sunset-beach',
+          name: 'Sunset Beach Resort',
+          category: 'Beach',
+          rating: 4.8,
+          image: 'https://images.unsplash.com/photo-1571401835393-8c5f35328320?auto=format&fit=crop&w=800&q=80'
+        },
+        {
+          id: 'mountain-view',
+          name: 'Mountain View Lodge',
+          category: 'Mountain',
+          rating: 4.6,
+          image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80'
+        },
+        {
+          id: 'central-park',
+          name: 'Central Park Gardens',
+          category: 'Park',
+          rating: 4.4,
+          image: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=800&q=80'
+        }
+      ];
+
+      // Function to create a result card
+      function createResultCard(place) {
+        return `
+          <div class="pick-card modern-card" data-href="detail.html" style="margin: 0 16px 20px 16px; border-radius: 24px; overflow: hidden; background: #2a2a2a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+            <div class="pick-img-wrap" style="position: relative; height: 200px;">
+              <img class="pick-img" src="${place.image}" alt="${place.name}" style="width:100%; height:100%; object-fit:cover;">
+              <div class="pick-gradient" style="position:absolute; top:0; left:0; width:100%; height:100%; background:linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 100%);"></div>
+              <div class="pick-info" style="position:absolute; top:0; left:0; right:0; padding:16px; display:flex; justify-content:space-between; align-items:center;">
+                <span class="pick-category" style="background:rgba(255,255,255,0.9); color:#23272f; padding:6px 16px; border-radius:16px; font-size:0.9rem; font-weight:500;">${place.category}</span>
+                <button class="bookmark-btn" data-id="${place.id}" type="button">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M6 4a2 2 0 0 0-2 2v14l8-5.333L20 20V6a2 2 0 0 0-2-2H6z"/>
+                  </svg>
+                </button>
+              </div>
+              <div class="pick-overlay-bottom" style="position:absolute; bottom:0; left:0; right:0; padding:20px 16px; color:white;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span class="pick-title" style="font-size:1.2rem; font-weight:600;">${place.name}</span>
+                  <span class="pick-rating" style="display:flex; align-items:center; background:rgba(255,255,255,0.9); color:#23272f; padding:4px 12px; border-radius:12px; font-weight:600;">
+                    <svg width="16" height="16" fill="#FFD600" viewBox="0 0 24 24" style="margin-right:4px;">
+                      <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                    </svg>
+                    ${place.rating}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      // Function to handle search
+      function handleSearch() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const filteredPlaces = places.filter(place => 
+          place.name.toLowerCase().includes(searchTerm) || 
+          place.category.toLowerCase().includes(searchTerm)
+        );
+
+        searchResults.innerHTML = filteredPlaces.length > 0 
+          ? filteredPlaces.map(place => createResultCard(place)).join('')
+          : '<p class="no-results">No results found</p>';
+
+        // Reinitialize bookmark buttons after updating results
+        initializeBookmarkButtons();
+      }
+
+      // Function to filter by category
+      window.filterByCategory = function(category) {
+        const filteredPlaces = places.filter(place => place.category === category);
+        searchResults.innerHTML = filteredPlaces.length > 0 
+          ? filteredPlaces.map(place => createResultCard(place)).join('')
+          : '<p class="no-results">No places found in this category</p>';
+        
+        // Add active state to selected category
+        document.querySelectorAll('.category-item').forEach(item => {
+          if (item.querySelector('span').textContent === category) {
+            item.style.transform = 'scale(1.05)';
+            item.querySelector('.category-icon').style.background = '#4a4a4a';
+          } else {
+            item.style.transform = 'scale(1)';
+            item.querySelector('.category-icon').style.background = '#2a2a2a';
+          }
+        });
+
+        // Reinitialize bookmark buttons after updating results
+        initializeBookmarkButtons();
+      };
+
+      // Function to initialize bookmark buttons
+      function initializeBookmarkButtons() {
+        document.querySelectorAll('.bookmark-btn').forEach(btn => {
+          const id = btn.dataset.id;
+          const savedBookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
+          if (savedBookmarks.includes(id)) {
+            btn.classList.add('active');
+          }
+        });
+      }
+
+      // Add event listener for search input
+      searchInput.addEventListener('input', handleSearch);
+
+      // Initial search results
+      handleSearch();
+
+      // Navigation click handlers
+      document.querySelectorAll('.nav-btn[data-href]').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const href = this.dataset.href;
+          if (href) {
+            window.location.href = href;
+          }
+        });
+      });
+
+      // Back button handler
+      document.querySelector('.back-btn').addEventListener('click', function() {
+        const href = this.dataset.href;
+        if (href) {
+          window.location.href = href;
+        }
+      });
+
+      // Category click handlers
+      document.querySelectorAll('.category-item').forEach(item => {
+        item.addEventListener('click', function() {
+          const category = this.dataset.category;
+          filterByCategory(category);
+        });
+      });
+    });
+
+    // Card click handlers
+    document.addEventListener('click', function(e) {
+      const card = e.target.closest('.pick-card');
+      if (card && !e.target.closest('.bookmark-btn')) {
+        const href = card.dataset.href;
+        if (href) {
+          window.location.href = href;
+        }
+      }
+    });
+  </script>
+
+  <script src="../js/navigation.js"></script>
+  <script src="../js/bookmark-handler.js"></script>
+</body>
+</html> 
