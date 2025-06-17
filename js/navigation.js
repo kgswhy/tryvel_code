@@ -54,7 +54,11 @@ function setupUniversalBookmark() {
     btn.addEventListener('click', function(e) {
       e.preventDefault();
       e.stopPropagation(); // Prevent event bubbling to parent card
+      
+      // Toggle active class
+      const wasActive = this.classList.contains('active');
       this.classList.toggle('active');
+      
       // Add animation class
       this.classList.add('animating');
       setTimeout(() => {
@@ -65,8 +69,18 @@ function setupUniversalBookmark() {
       const id = this.dataset.id;
       if (id) {
         let bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '{}');
-        bookmarks[id] = this.classList.contains('active');
+        const isBookmarked = this.classList.contains('active');
+        bookmarks[id] = isBookmarked;
         localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+        
+        // Show notification
+        if (typeof showNotification === 'function') {
+          if (isBookmarked) {
+            showNotification('Successfully saved to bookmarks', 'bookmark-add');
+          } else {
+            showNotification('Removed from bookmarks', 'bookmark-remove');
+          }
+        }
       }
     });
     
