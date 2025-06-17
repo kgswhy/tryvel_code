@@ -28,32 +28,9 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
-    .bookmark-btn svg {
-      width: 24px;
-      height: 24px;
-      transition: all 0.3s ease;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 2;
-    }
+   
 
-    .bookmark-btn:hover {
-      transform: scale(1.1);
-      background: rgba(255, 255, 255, 1);
-    }
-
-    .bookmark-btn.active svg {
-      fill: #FFD600;
-      stroke: #FFD600;
-    }
-
-    .bookmark-btn.animating {
-      transform: scale(1.2);
-    }
-
-    .bookmark-btn:active {
-      transform: scale(0.95);
-    }
+    
   </style>
 </head>
 <body class="detail-page">
@@ -74,11 +51,7 @@
       <button class="back-btn" aria-label="Back" onclick="window.history.back()">
         <svg width="24" height="24" fill="none" stroke="var(--color-base)" stroke-width="2" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
       </button>
-      <button class="bookmark-btn" data-id="mandalika" aria-label="Bookmark" type="button">
-        <svg viewBox="0 0 24 24">
-          <path d="M6 4a2 2 0 0 0-2 2v14l8-5.333L20 20V6a2 2 0 0 0-2-2H6z"/>
-        </svg>
-      </button>
+      
     </div>
 
     <!-- Detail Content -->
